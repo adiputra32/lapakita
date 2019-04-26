@@ -1,13 +1,12 @@
 <?php
 
-namespace App\Http\Controllers\Auth;
+namespace App\Http\Controllers\AuthAdmin;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Foundation\Auth\AuthenticatesUsers;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Redirect;
+
 class LoginController extends Controller
 {
     /*
@@ -21,14 +20,12 @@ class LoginController extends Controller
     |
     */
 
-    use AuthenticatesUsers;
-
     /**
      * Where to redirect users after login.
      *
      * @var string
      */
-    protected $redirectTo = '/home';
+  
 
     /**
      * Create a new controller instance.
@@ -37,37 +34,36 @@ class LoginController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('guest')->except(['logout','logoutUser']);
+        $this->middleware('guest:admin')->except(['logout','logoutAdmin']);
     }
 
-    public function showLoginForm()
-    {
-        return view('auth.login');
+    public function showLoginForm(){
+        return view('authAdmin.login');
     }
 
     public function login(Request $request){
         $this->validate($request,[
-            'email'=>'required',
+            'userName'=>'required',
             'password'=>'required||min:6'
             
             ]);
 
         $credential = [
-            'email'=> $request->email,
+            'username'=> $request->userName,
             'password'=>$request->password
         ];
 
-        if (Auth::guard('web')->attempt($credential,$request->member)){
-            return redirect()->intended(route('user.home'));
+        if (Auth::guard('admin')->attempt($credential,$request->member)){
+            return redirect()->intended(route('admin.home'));
 
         }
 
-        return redirect()->back()->withInput($request->only('email','remember'));
+        return redirect()->back()->withInput($request->only('username','remember'));
     }
 
-    public function logoutUser()
+    public function logoutAdmin()
     {
-        Auth::guard('web')->logout();
-        return Redirect::route('user.login');
+        Auth::guard('admin')->logout();
+        return Redirect::route('admin.login');
     }
 }
