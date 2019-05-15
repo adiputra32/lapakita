@@ -10,6 +10,8 @@ use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Auth\Events\Registered;
+use App\Mail\VerifyEmail; 
+
 
 
 class RegisterController extends Controller
@@ -73,17 +75,16 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
+       
         
         
         if($data['foto']){
             
             $folderName = 'user';
-            $fileName = $data['foto'].'_image';
+            $fileName = 'user'.'_image';
             $fileExtension = $data['foto']->getClientOriginalExtension();
             $fileNameToStorage = $fileName.'_'.time().'.'.$fileExtension;
-            
-            $fileNameToStorage1 = substr($fileNameToStorage,21);;
-            $filePath = $data['foto']->storeAs('public/'.$folderName , $fileNameToStorage1); 
+            $filePath = $data['foto']->storeAs('public/'.$folderName , $fileNameToStorage); 
         } 
         else {
             $fileNameToStorage = 'null.jpg';
@@ -94,16 +95,18 @@ class RegisterController extends Controller
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
-            'status' => 1,
-            'profile_image' => $fileNameToStorage1,
+            'status' => 0,
+            'profile_image' => $fileNameToStorage,
         ]);
+
+       
 
         return $user;
     }
 
     public function register(Request $request)
     {
-        
+    
         
         $this->validator($request->all())->validate();
 
@@ -115,34 +118,7 @@ class RegisterController extends Controller
                         ?: redirect(route('user.home'));
     }
 
-    // public function create(Request $request){
-        
-        
-    //     if($request->foto){
-            
-    //         $folderName = 'user';
-    //         $fileName = $request->foto.'_image';
-    //         $fileExtension = $request->foto->getClientOriginalExtension();
-    //         $fileNameToStorage = $fileName.'_'.time().'.'.$fileExtension;
-            
-    //         $fileNameToStorage1 = substr($fileNameToStorage,21,23);
-    //         ;
-    //         $filePath = $request->foto->storeAs('public/'.$folderName , $fileNameToStorage1); 
-    //     } 
-    //     else {
-    //         $fileNameToStorage = 'null.jpg';
-    //     }
-
-    //     $user = new User();
-    //     $user->name = $request->name;
-    //     $user->email = $request->email;
-    //     $user->status = 1;
-    //     $user->profile_image = $fileNameToStorage1;
-    //     $user->password = bcrypt($request->password);
-    //     $user->save();
-    //     return redirect()->route('user.home');
-          
-    // }
+    
 
     protected function guard()
     {
@@ -160,6 +136,7 @@ class RegisterController extends Controller
     {
         //
     }
+
 }
 
 

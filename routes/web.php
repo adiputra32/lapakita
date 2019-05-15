@@ -11,11 +11,11 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', 'ShopController@index')->name('welcome');
 
 Auth::routes();
+
+Auth::routes(['verify' => true]);
 
 Route::group(['prefix' => 'user'], function () { 
     Route::get('/regis','Auth\RegisterController@showRegistrationForm')->name('user.regis'); 
@@ -23,8 +23,7 @@ Route::group(['prefix' => 'user'], function () {
     Route::get('/login','Auth\LoginController@showLoginForm')->name('user.login');
     Route::post('/login', 'Auth\LoginController@login')->name('user.login.submit');
     Route::get('/logout','Auth\LoginController@logoutUser')->name('user.logout');
-    Route::get('/home', 'HomeController@index')->name('user.home');
-        
+    Route::get('/home', 'ShopController@index')->name('user.home');       
 });
 
 
@@ -34,3 +33,6 @@ Route::group(['prefix' => 'admin'], function () {
     Route::get('/home', 'AdminController@index')->name('admin.home');
     Route::get('/logout','AuthAdmin\LoginController@logoutAdmin')->name('admin.logout');
 });
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
