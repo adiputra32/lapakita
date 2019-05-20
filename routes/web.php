@@ -23,7 +23,14 @@ Route::group(['prefix' => 'user'], function () {
     Route::get('/login','Auth\LoginController@showLoginForm')->name('user.login');
     Route::post('/login', 'Auth\LoginController@login')->name('user.login.submit');
     Route::get('/logout','Auth\LoginController@logoutUser')->name('user.logout');
-    Route::get('/home', 'ShopController@index')->name('user.home');       
+    Route::get('/home', 'ShopController@index')->name('user.home'); 
+    Route::get('/category', 'ShopController@category')->name('user.category');
+    Route::get('/single-product', 'ShopController@singleProduct')->name('user.single-product');  
+    Route::get('/cart', 'ShopController@cart')->name('user.cart');     
+    Route::get('/checkout', 'ShopController@checkout')->name('user.checkout');  
+    Route::get('/confirmation', 'ShopController@confirmation')->name('user.confirmation');  
+    Route::get('/contact', 'ShopController@contact')->name('user.contact');   
+    Route::get('/tracking', 'ShopController@tracking')->name('user.tracking');       
 });
 
 
@@ -35,4 +42,4 @@ Route::group(['prefix' => 'admin'], function () {
 });
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+//Route::get('/home', 'HomeController@index')->name('home');
