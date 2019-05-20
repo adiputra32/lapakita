@@ -7,6 +7,12 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Auth\Events\Registered;
+use App\Mail\VerifyEmail; 
+
+
 
 class RegisterController extends Controller
 {
@@ -46,6 +52,12 @@ class RegisterController extends Controller
      * @param  array  $data
      * @return \Illuminate\Contracts\Validation\Validator
      */
+
+    public function showRegistrationForm()
+    {
+        return view('auth.register');
+    }
+
     protected function validator(array $data)
     {
         return Validator::make($data, [
@@ -63,10 +75,70 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        return User::create([
+       
+        
+        
+        if($data['foto']){
+            
+            $folderName = 'user';
+            $fileName = 'user'.'_image';
+            $fileExtension = $data['foto']->getClientOriginalExtension();
+            $fileNameToStorage = $fileName.'_'.time().'.'.$fileExtension;
+            $filePath = $data['foto']->storeAs('public/'.$folderName , $fileNameToStorage); 
+        } 
+        else {
+            $fileNameToStorage = 'null.jpg';
+        }
+            
+
+       $user = User::create([
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
+            'status' => 0,
+            'profile_image' => $fileNameToStorage,
         ]);
+
+       
+
+        return $user;
     }
+
+    public function register(Request $request)
+    {
+    
+        
+        $this->validator($request->all())->validate();
+
+        event(new Registered($user = $this->create($request->all())));
+
+        $this->guard()->login($user);
+
+        return $this->registered($request, $user)
+                        ?: redirect(route('user.home'));
+    }
+
+    
+
+    protected function guard()
+    {
+        return Auth::guard('');
+    }
+
+    /**
+     * The user has been registered.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  mixed  $user
+     * @return mixed
+     */
+    protected function registered(Request $request, $user)
+    {
+        //
+    }
+
 }
+
+
+
+

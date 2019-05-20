@@ -4,7 +4,10 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
-
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Foundation\Auth\RegistersUsers;
+use Illuminate\Http\Request;
+use Redirect;
 class LoginController extends Controller
 {
     /*
@@ -34,6 +37,37 @@ class LoginController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('guest')->except('logout');
+        $this->middleware('guest')->except(['logout','logoutUser']);
+    }
+
+    public function showLoginForm()
+    {
+        return view('auth.login');
+    }
+
+    public function login(Request $request){
+        $this->validate($request,[
+            'email'=>'required',
+            'password'=>'required||min:6'
+            
+            ]);
+
+        $credential = [
+            'email'=> $request->email,
+            'password'=>$request->password
+        ];
+
+        if (Auth::guard('web')->attempt($credential,$request->member)){
+            return redirect()->intended(route('user.home'));
+
+        }
+
+        return redirect()->back()->withInput($request->only('email','remember'));
+    }
+
+    public function logoutUser()
+    {
+        Auth::guard('web')->logout();
+        return Redirect::route('user.login');
     }
 }
