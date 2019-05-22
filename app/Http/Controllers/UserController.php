@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\User;
+use Hash;
 
 class UserController extends Controller
 {
@@ -52,9 +53,20 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show()
     {
         //
+        if (Auth::check()) {
+            $user = Auth::user();
+            $showuser = User::select('users.*')->where('users.id',Auth::id())->get();
+            
+            // echo $user;
+            return view('user.edit', compact('user','showuser'));
+        } else {
+            return view('user.edit');
+        }
+
+
     }
 
     /**
@@ -65,7 +77,9 @@ class UserController extends Controller
      */
     public function edit($id)
     {
-        //
+        
+       
+
     }
 
     /**
@@ -77,7 +91,24 @@ class UserController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        
+        // update data pegawai
+        $hashedPassword = User::find($id)->password;
+        
+        
+        if (Hash::check($request->oldpassword, $hashedPassword)) {
+            $userUpdate = User::find($id);
+
+            $userUpdate->name = $request->name;
+            $userUpdate->email = $request->email;
+            $userUpdate->password = Hash::make($request->newpassword) ;
+
+            $userUpdate->save();
+
+            return redirect()->route('user.show');
+        }
+        
+        
     }
 
     /**
