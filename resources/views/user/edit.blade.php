@@ -20,17 +20,18 @@
 	</section>
 	<br>
 	<div class="container">
+		@foreach($showuser as $se)
 			<div class="row">
 				<div class="col-lg-6">
 					<div class="login_box_img">
-						<img class="img-fluid" src="/shop-assets/img/login.jpg" alt="">
+						<img class="img-fluid" src="{{ asset('user/user/'.$se->profile_image) }}" alt="">
 						
 					</div>
 				</div>
 				<div class="col-lg-6">
 					<div class="login_form_inner">
 						<h3>Edit Your Profile</h3>
-						@foreach($showuser as $se)
+						
                         <form class="row login_form" action="{{ route('user.update', $se->id) }}" method="POST" id="contactForm"   novalidate="novalidate" enctype="multipart/form-data">
 						{{ csrf_field() }}
             			{{ method_field('PUT') }}
@@ -50,10 +51,11 @@
 								<button type="submit" class="primary-btn">Update Profile</button>
 							</div>
 						</form>
-						@endforeach
+						
 					</div>
 				</div>
 			</div>
+			@endforeach
 		</div>
 		<br>
 	<!-- End Banner Area -->
