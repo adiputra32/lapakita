@@ -84,7 +84,7 @@ class RegisterController extends Controller
             $fileName = 'user'.'_image';
             $fileExtension = $data['foto']->getClientOriginalExtension();
             $fileNameToStorage = $fileName.'_'.time().'.'.$fileExtension;
-            $filePath = $data['foto']->storeAs('public/'.$folderName , $fileNameToStorage); 
+            $filePath = $data['foto']->move(public_path('user/'.$folderName) , $fileNameToStorage); 
         } 
         else {
             $fileNameToStorage = 'null.jpg';
