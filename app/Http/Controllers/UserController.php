@@ -92,16 +92,25 @@ class UserController extends Controller
     public function update(Request $request, $id)
     {
         
-        // update data pegawai
         $hashedPassword = User::find($id)->password;
+        $userUpdate = User::find($id);
         
         
         if (Hash::check($request->oldpassword, $hashedPassword)) {
-            $userUpdate = User::find($id);
 
             $userUpdate->name = $request->name;
             $userUpdate->email = $request->email;
             $userUpdate->password = Hash::make($request->newpassword) ;
+
+            if($file=$request->file('foto')){
+                
+                $folderName = 'user';
+                $fileName = 'user'.'_image';
+                $fileExtension = $file->getClientOriginalExtension();
+                $fileNameToStorage = $fileName.'_'.time().'.'.$fileExtension;
+                $filePath = $file->move(public_path('user/'.$folderName) , $fileNameToStorage); 
+                $userUpdate->profile_image = $fileNameToStorage;
+            }
 
             $userUpdate->save();
 

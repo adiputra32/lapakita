@@ -10,9 +10,9 @@
 				<div class="col-first">
 					<h1>Edit Profile</h1>
 					<nav class="d-flex align-items-center">
-						<a href="index.html">Home<span class="lnr lnr-arrow-right"></span></a>
+						<a href="home/">Home<span class="lnr lnr-arrow-right"></span></a>
 						<a href="#">{{$user->name}}<span class="lnr lnr-arrow-right"></span></a>
-						<a href="single-product.html">Edit</a>
+						<a href="#">Edit</a>
 					</nav>
 				</div>
 			</div>
@@ -24,8 +24,8 @@
 			<div class="row">
 				<div class="col-lg-6">
 					<div class="login_box_img">
+						<h2>Foto Profile<h2>
 						<img class="img-fluid" src="{{ asset('user/user/'.$se->profile_image) }}" alt="">
-						
 					</div>
 				</div>
 				<div class="col-lg-6">
@@ -46,10 +46,17 @@
                             </div>
 							<div class="col-md-12 form-group">
 								<input type="password" class="form-control" id="password" name="newpassword" placeholder="New Password" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Password'">
+							</div>
+							<div class="file-field">
+							<label style="font-size:15px;margin-left:-125px;">Update Photo Profile</label>
+                                <div class="btn btn-outline-white waves-effect btn-sm float-left"style="margin-left:10px;margin-bottom:20px;">
+                                    <input type="file" name="foto">
+                                </div>
                             </div>
 							<div class="col-md-12 form-group">
 								<button type="submit" class="primary-btn">Update Profile</button>
 							</div>
+							
 						</form>
 						
 					</div>
