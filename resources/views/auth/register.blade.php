@@ -1,4 +1,4 @@
-@extends('master-shop')
+@extends('layouts.master-shop')
 
 @section ('title', 'Toko Sneakers - User Register')
     
