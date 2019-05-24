@@ -3,11 +3,11 @@
 <head>
 	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
 	<title>@yield('title')</title>
-	<meta content='width=device-width, initial-scale=1.0, shrink-to-fit=no' name='viewport' />
-	<link rel="icon" href="../admin-assets/img/icon.ico" type="image/x-icon"/>
+	<meta content='width=device-width, initial-scale=1.0, shrink-to-fit=no' name='viewport' /> 
+	<link rel="icon" href="{!! asset('admin-assets/img/icon.ico')!!} type="image/x-icon"/>
 
 	<!-- Fonts and icons -->
-	<script src="../admin-assets/js/plugin/webfont/webfont.min.js"></script>
+	<script src="{!! asset('admin-assets/js/plugin/webfont/webfont.min.js')!!}"></script>
 	<script>
 		WebFont.load({
 			google: {"families":["Lato:300,400,700,900"]},
@@ -19,8 +19,8 @@
 	</script>
 
 	<!-- CSS Files -->
-	<link rel="stylesheet" href="../admin-assets/css/bootstrap.min.css">
-	<link rel="stylesheet" href="../admin-assets/css/atlantis.min.css">
+	<link rel="stylesheet" href="{!! asset('admin-assets/css/bootstrap.min.css')!!}">
+	<link rel="stylesheet" href="{!! asset('admin-assets/css/atlantis.min.css')!!}">
 
 	<!-- CSS Just for demo purpose, don't include it in your project -->
 
@@ -111,7 +111,7 @@
 					</div>
 					<ul class="nav nav-primary">
 						<li class="nav-item active">
-							<a  href="#dashboard" >
+						<a  href="{{route('admin.home')}}" >
 								<i class="fas fa-home"></i>
 								<p>Dashboard</p>
 							</a>
@@ -131,55 +131,21 @@
 							<div class="collapse" id="base">
 								<ul class="nav nav-collapse">
 									<li>
-										<a href="components/avatars.html">
-											<span class="sub-item">Avatars</span>
+										<a href="{{route('admin.product')}}">
+											<span class="sub-item">Product List</span>
 										</a>
 									</li>
 									<li>
-										<a href="components/buttons.html">
-											<span class="sub-item">Buttons</span>
+										<a href="{{route('admin.category')}}">
+											<span class="sub-item">Product Categories</span>
 										</a>
 									</li>
 									<li>
 										<a href="components/gridsystem.html">
-											<span class="sub-item">Grid System</span>
+											<span class="sub-item">Product Review</span>
 										</a>
 									</li>
-									<li>
-										<a href="components/panels.html">
-											<span class="sub-item">Panels</span>
-										</a>
-									</li>
-									<li>
-										<a href="components/notifications.html">
-											<span class="sub-item">Notifications</span>
-										</a>
-									</li>
-									<li>
-										<a href="components/sweetalert.html">
-											<span class="sub-item">Sweet Alert</span>
-										</a>
-									</li>
-									<li>
-										<a href="components/font-awesome-icons.html">
-											<span class="sub-item">Font Awesome Icons</span>
-										</a>
-									</li>
-									<li>
-										<a href="components/simple-line-icons.html">
-											<span class="sub-item">Simple Line Icons</span>
-										</a>
-									</li>
-									<li>
-										<a href="components/flaticons.html">
-											<span class="sub-item">Flaticons</span>
-										</a>
-									</li>
-									<li>
-										<a href="components/typography.html">
-											<span class="sub-item">Typography</span>
-										</a>
-									</li>
+									
 								</ul>
 							</div>
 						</li>
@@ -191,29 +157,10 @@
 							</a>
 							<div class="collapse" id="sidebarLayouts">
 								<ul class="nav nav-collapse">
+									
 									<li>
-										<a href="sidebar-style-1.html">
-											<span class="sub-item">Sidebar Style 1</span>
-										</a>
-									</li>
-									<li>
-										<a href="overlay-sidebar.html">
-											<span class="sub-item">Overlay Sidebar</span>
-										</a>
-									</li>
-									<li>
-										<a href="compact-sidebar.html">
-											<span class="sub-item">Compact Sidebar</span>
-										</a>
-									</li>
-									<li>
-										<a href="static-sidebar.html">
-											<span class="sub-item">Static Sidebar</span>
-										</a>
-									</li>
-									<li>
-										<a href="icon-menu.html">
-											<span class="sub-item">Icon Menu</span>
+											<a href="{{route('admin.transaction')}}">
+											<span class="sub-item">Transactions List</span>
 										</a>
 									</li>
 								</ul>
@@ -228,8 +175,8 @@
 							<div class="collapse" id="forms">
 								<ul class="nav nav-collapse">
 									<li>
-										<a href="forms/forms.html">
-											<span class="sub-item">Basic Form</span>
+									<a href="{{route('admin.courier')}}">
+											<span class="sub-item">Courier List</span>
 										</a>
 									</li>
 								</ul>
@@ -244,13 +191,8 @@
 							<div class="collapse" id="tables">
 								<ul class="nav nav-collapse">
 									<li>
-										<a href="tables/tables.html">
-											<span class="sub-item">Basic Table</span>
-										</a>
-									</li>
-									<li>
-										<a href="tables/datatables.html">
-											<span class="sub-item">Datatables</span>
+									<a href="{{route('admin.user')}}">
+											<span class="sub-item">User List</span>
 										</a>
 									</li>
 								</ul>
@@ -266,8 +208,12 @@
 		<div class="main-panel">
 			<div class="content">
 				<div class="panel-header bg-primary-gradient">
+					<div class="page-inner py-5">
+							@yield('heading')
+					</div>
+				</div>
+				<div class="page-inner mt-5">
 					@yield('content')
-					
 				</div>
 			</div>
 		</div>
@@ -278,43 +224,205 @@
 		<!-- End Custom template -->
 	</div>
 	<!--   Core JS Files   -->
-	<script src="../admin-assets/js/core/jquery.3.2.1.min.js"></script>
-	<script src="../admin-assets/js/core/popper.min.js"></script>
-	<script src="../admin-assets/js/core/bootstrap.min.js"></script>
+	<script src="{!! asset('admin-assets/js/core/jquery.3.2.1.min.js')!!}"></script>  
+	<script src="{!! asset('admin-assets/js/core/popper.min.js')!!}"></script> 
+	<script src="{!! asset('admin-assets/js/core/bootstrap.min.js')!!}"></script> 
 
 	<!-- jQuery UI -->
-	<script src="../admin-assets/js/plugin/jquery-ui-1.12.1.custom/jquery-ui.min.js"></script>
-	<script src="../admin-assets/js/plugin/jquery-ui-touch-punch/jquery.ui.touch-punch.min.js"></script>
+	<script src="{!! asset('admin-assets/js/plugin/jquery-ui-1.12.1.custom/jquery-ui.min.js')!!}"></script>
+	<script src="{!! asset('admin-assets/js/plugin/jquery-ui-touch-punch/jquery.ui.touch-punch.min.js')!!}"></script> 
 
 	<!-- jQuery Scrollbar -->
-	<script src="../admin-assets/js/plugin/jquery-scrollbar/jquery.scrollbar.min.js"></script>
+	<script src= "{!! asset('admin-assets/js/plugin/jquery-scrollbar/jquery.scrollbar.min.js')!!}"></script>
 
 
 	<!-- Chart JS -->
-	<script src="../admin-assets/js/plugin/chart.js/chart.min.js"></script>
+	<script src="{!! asset('admin-assets/js/plugin/chart.js/chart.min.js')!!}"></script>  
 
 	<!-- jQuery Sparkline -->
-	<script src="../admin-assets/js/plugin/jquery.sparkline/jquery.sparkline.min.js"></script>
+	<script src="{!! asset('admin-assets/js/plugin/jquery.sparkline/jquery.sparkline.min.js')!!}"></script> 
 
 	<!-- Chart Circle -->
-	<script src="../admin-assets/js/plugin/chart-circle/circles.min.js"></script>
+	<script src="{!! asset('admin-assets/js/plugin/chart-circle/circles.min.js')!!}"></script> 
 
 	<!-- Datatables -->
-	<script src="../admin-assets/js/plugin/datatables/datatables.min.js"></script>
+	<script src="{!! asset('admin-assets/js/plugin/datatables/datatables.min.js')!!}"></script> 
 
 	<!-- Bootstrap Notify -->
-	<script src="../admin-assets/js/plugin/bootstrap-notify/bootstrap-notify.min.js"></script>
+	<script src="{!! asset('admin-assets/js/plugin/bootstrap-notify/bootstrap-notify.min.js')!!}""../"></script> 
 
 	<!-- jQuery Vector Maps -->
-	<script src="../admin-assets/js/plugin/jqvmap/jquery.vmap.min.js"></script>
-	<script src="../admin-assets/js/plugin/jqvmap/maps/jquery.vmap.world.js"></script>
+	<script src="{!! asset('admin-assets/js/plugin/jqvmap/jquery.vmap.min.js')!!}"></script> 
+	<script src="{!! asset('admin-assets/js/plugin/jqvmap/maps/jquery.vmap.world.js')!!}"></script> 
 
 	<!-- Sweet Alert -->
-	<script src="../admin-assets/js/plugin/sweetalert/sweetalert.min.js"></script>
+	<script src= "{!! asset('admin-assets/js/plugin/sweetalert/sweetalert.min.js')!!}"></script> 
 
 	<!-- Atlantis JS -->
-	<script src="../admin-assets/js/atlantis.min.js"></script>
-
+	<script src="{!! asset('admin-assets/js/atlantis.min.js"')!!}"></script>  
+	<script type="text/javascript">
+		$(document).ready(function() {
+			$('#basic-datatables').DataTable({
+			});
 	
+			$('#multi-filter-select').DataTable( {
+				"pageLength": 5,
+				initComplete: function () {
+					this.api().columns().every( function () {
+						var column = this;
+						var select = $('<select class="form-control"><option value=""></option></select>')
+						.appendTo( $(column.footer()).empty() )
+						.on( 'change', function () {
+							var val = $.fn.dataTable.util.escapeRegex(
+								$(this).val()
+								);
+	
+							column
+							.search( val ? '^'+val+'$' : '', true, false )
+							.draw();
+						} );
+	
+						column.data().unique().sort().each( function ( d, j ) {
+							select.append( '<option value="'+d+'">'+d+'</option>' )
+						} );
+					} );
+				}
+			});
+	
+			// Add Row
+			$('#add-row').DataTable({
+				"pageLength": 5,
+			});
+	
+			var action = '<td> <div class="form-button-action"> <button type="button" data-toggle="tooltip" title="" class="btn btn-link btn-simple-primary btn-lg" data-original-title="Edit Task"> <i class="fa fa-edit"></i> </button> <button type="button" data-toggle="tooltip" title="" class="btn btn-link btn-simple-danger" data-original-title="Remove"> <i class="fa fa-times"></i> </button> </div> </td>';
+	
+			$('#addRowButton').click(function() {
+				$('#add-row').dataTable().fnAddData([
+					$("#addName").val(),
+					$("#addPosition").val(),
+					$("#addOffice").val(),
+					action
+					]);
+				$('#addRowModal').modal('hide');
+	
+			});
+		});
+
+		//detail MODAL Transactions
+		$('#transUpdate').on('show.bs.modal', function (event) {
+					var button = $(event.relatedTarget)
+					var id = button.data('idtransaction')
+					var timeout = button.data('timeout')
+					var subtotal = button.data('subtotal')
+					var shipping = button.data('shipping')
+					var total = button.data('total')
+					var address = button.data('address')
+					var regency = button.data('regency')
+					var province = button.data('province')
+					var user = button.data('user')
+					var status = button.data('status')
+					var payment = button.data('payment')
+					var courier = button.data('courier')
+					// If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
+					// Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
+					var modal = $(this)
+					modal.find('.modal-body #idtransaction').val(id)
+					modal.find('.modal-body #timeout').val(timeout)
+					modal.find('.modal-body #subtotal').val(subtotal)
+					modal.find('.modal-body #shipping').val(shipping)
+					modal.find('.modal-body #total').val(total)
+					modal.find('.modal-body #address').val(address)
+					modal.find('.modal-body #regency').val(regency)
+					modal.find('.modal-body #province').val(province)
+					modal.find('.modal-body #user').val(user)
+					modal.find('.modal-body #status').val(status)
+					modal.find('.modal-body #payment').val(payment)
+					modal.find('.modal-body #courier').val(courier)
+				})
+
+
+		//delete MODAL Category
+		$('#categoryDelete').on('show.bs.modal', function (event) {
+					var button = $(event.relatedTarget)
+					var id = button.data('idcategory')
+					// If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
+					// Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
+					var modal = $(this)
+					modal.find('.modal-body #idcategory').val(id)
+				})
+
+				
+		//delete MODAL Category
+		$('#categoryUpdate').on('show.bs.modal', function (event) {
+					var button = $(event.relatedTarget)
+					var id = button.data('idcategory')
+					var category = button.data('mycategory')
+					// If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
+					// Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
+					var modal = $(this)
+					modal.find('.modal-body #idcategory').val(id)
+					modal.find('.modal-body #mycategory').val(category)
+				})
+
+		//delete MODAL COURIER
+		$('#courierDelete').on('show.bs.modal', function (event) {
+					var button = $(event.relatedTarget)
+					var id = button.data('idcourier')
+					// If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
+					// Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
+					var modal = $(this)
+					modal.find('.modal-body #idcourier').val(id)
+				})
+
+		//update MODAL COURIER		
+		$('#courierUpdate').on('show.bs.modal', function (event) {
+					var button = $(event.relatedTarget)
+					var courier = button.data('mycourier')
+					var id = button.data('idcourier')
+					// If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
+					// Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
+					var modal = $(this)
+					modal.find('.modal-body #courier').val(courier)
+					modal.find('.modal-body #idcourier').val(id)
+				})
+
+		//delete MODAL PRODUCT
+		$('#productDelete').on('show.bs.modal', function (event) {
+					var button = $(event.relatedTarget)
+					var id = button.data('idproduct')
+					// If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
+					// Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
+					var modal = $(this)
+					modal.find('.modal-body #idproduct').val(id)
+				})
+
+		$('#productUpdate').on('show.bs.modal', function (event) {
+					var button = $(event.relatedTarget)
+					var id = button.data('idproduct')
+					var product_name = button.data('name_p')
+					var price = button.data('price_p')
+					var desc = button.data('description_p')
+					var rate = button.data('rate_p')
+					var stock= button.data('stock_p')
+					var weight= button.data('weight_p')
+					var percentage = button.data('percentage')
+					var start= button.data('start')
+					var end= button.data('end')
+					// If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
+					// Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
+					var modal = $(this)
+					modal.find('.modal-body #idproduct').val(id)
+					modal.find('.modal-body #product_name').val(product_name)
+					modal.find('.modal-body #price').val(price)
+					modal.find('.modal-body #description').val(desc)
+					modal.find('.modal-body #stock').val(stock)
+					modal.find('.modal-body #weight').val(weight)
+					modal.find('.modal-body #rate').val(rate)
+					modal.find('.modal-body #percentage').val(percentage)
+					modal.find('.modal-body #start').val(start)
+					modal.find('.modal-body #end').val(end)
+				})
+	</script>
+
 </body>
 </html>
