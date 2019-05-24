@@ -37,6 +37,7 @@ class ShopController extends Controller
             $cart->user_id=$user->id;
             $cart->product_id=$request->get('id_product');
             $cart->qty=1;
+            $cart->status = 'notyet';
             $cart->save();
 
             $product = Product::orderBy('id','DESC')->first();
@@ -72,6 +73,7 @@ class ShopController extends Controller
             $cart->user_id=$user->id;
             $cart->product_id=$request->get('id_product');
             $cart->qty=1;
+            $cart->status = 'notyet';
             $cart->save();
 
             $products = Product::paginate(12);
@@ -95,6 +97,7 @@ class ShopController extends Controller
                 $cart->user_id=$user->id;
                 $cart->product_id=$request->get('id_product');
                 $cart->qty=$request->get('qty');
+                $cart->status = 'notyet';
                 $cart->save();
             }
            
