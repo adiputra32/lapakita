@@ -24,4 +24,8 @@ class Product extends Model
     {
         return $this->hasMany('App\Cart');
     }
+    
+    public function discount(){
+        return $this->hasMany('App\Discount', 'id_product');
+    }
 }

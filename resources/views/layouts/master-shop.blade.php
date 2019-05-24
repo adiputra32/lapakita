@@ -86,7 +86,7 @@
 									<a class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
 								aria-expanded="false" href="#">{{$user->name}}<i class="fa fa-caret-down fa-fw"></i></a>
 									<ul class="dropdown-menu">
-										<li class="nav-item"><a class="nav-link" href="#">Edit Account</a></li>
+										<li class="nav-item"><a class="nav-link" href="{{route('user.show')}}">Edit Account</a></li>
 										<li class="nav-item"><a class="nav-link" href="{{route('user.logout')}}">Logout</a></li>
 									</ul>
 								</li>

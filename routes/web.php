@@ -33,7 +33,9 @@ Route::group(['prefix' => 'user'], function () {
     Route::get('/confirmation', 'ShopController@confirmation')->name('user.confirmation'); 
     Route::post('/confirmation', 'ShopController@confirmationAdd')->name('user.confirmation');  
     Route::get('/contact', 'ShopController@contact')->name('user.contact');   
-    Route::get('/tracking', 'ShopController@tracking')->name('user.tracking');       
+    Route::get('/tracking', 'ShopController@tracking')->name('user.tracking');
+    Route::get('/edit', 'UserController@show')->name('user.show');
+    Route::match(['put','pacth'],'/update/{id}', 'UserController@update')->name('user.update');         
 });
 
 
@@ -42,7 +44,39 @@ Route::group(['prefix' => 'admin'], function () {
     Route::post('/login', 'AuthAdmin\LoginController@login')->name('admin.login.submit');
     Route::get('/home', 'AdminController@index')->name('admin.home');
     Route::get('/logout','AuthAdmin\LoginController@logoutAdmin')->name('admin.logout');
-});
-Auth::routes();
 
-//Route::get('/home', 'HomeController@index')->name('home');
+    Route::resource('/courier','Admin\AdminCourierController', [
+        'names' => [
+            'index' => 'admin.courier'
+        ]
+    ]);
+
+    Route::resource('/product','Admin\AdminProductController', [
+        'names' => [
+            'index' => 'admin.product'
+        ]
+    ]);
+
+    Route::resource('/category','Admin\AdminCategoryController', [
+        'names' => [
+            'index' => 'admin.category'
+        ]
+    ]);
+
+    Route::resource('/user','Admin\AdminUserController', [
+        'names' => [
+            'index' => 'admin.user'
+        ]
+    ]);
+
+    Route::resource('/transaction','Admin\AdminTransactionController', [
+        'names' => [
+            'index' => 'admin.transaction'
+        ]
+    ]);
+});
+
+// Auth::routes();
+
+// Route::get('/home', 'HomeController@index')->name('home');
+
