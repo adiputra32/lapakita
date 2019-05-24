@@ -86,6 +86,7 @@
                             <tr>
                                 <th>No</th>
                                 <th>Category Name</th>
+                                <th>Jenis</th>
                                 <th style="width: 10%">Action</th>
                             </tr>
                         </thead>
