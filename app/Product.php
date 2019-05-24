@@ -20,6 +20,11 @@ class Product extends Model
         return $this->hasMany('App\Product_Image');
     }
 
+    public function cart()
+    {
+        return $this->hasMany('App\Cart');
+    }
+    
     public function discount(){
         return $this->hasMany('App\Discount', 'id_product');
     }

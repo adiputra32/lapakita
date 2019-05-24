@@ -20,6 +20,7 @@
 	</section>
 	<!-- End Banner Area -->
 
+	@foreach($products as $product)
 	<!--================Single Product Area =================-->
 	<div class="product_image_area">
 		<div class="container">
@@ -39,32 +40,34 @@
 				</div>
 				<div class="col-lg-5 offset-lg-1">
 					<div class="s_product_text">
-						<h3>Faded SkyBlu Denim Jeans</h3>
-						<h2>$149.99</h2>
+						<h3>{{$product->product_name}}</h3>
+						<h2>Rp {{$product->price}}</h2>
 						<ul class="list">
-							<li><a class="active" href="#"><span>Category</span> : Household</a></li>
-							<li><a href="#"><span>Availibility</span> : In Stock</a></li>
+							<li><a class="active"><span>Category</span> : {{$product->category->first()->category_name}}</a></li>
+							<li><a><span>Availibility</span> : In Stock</a></li>
 						</ul>
-						<p>Mill Oil is an innovative oil filled radiator with the most modern technology. If you are looking for
-							something that can make your interior look awesome, and at the same time give you the pleasant warm feeling
-							during the winter.</p>
-						<div class="product_count">
-							<label for="qty">Quantity:</label>
-							<input type="text" name="qty" id="sst" maxlength="12" value="1" title="Quantity:" class="input-text qty">
-							<button onclick="var result = document.getElementById('sst'); var sst = result.value; if( !isNaN( sst )) result.value++;return false;"
-							 class="increase items-count" type="button"><i class="lnr lnr-chevron-up"></i></button>
-							<button onclick="var result = document.getElementById('sst'); var sst = result.value; if( !isNaN( sst ) &amp;&amp; sst > 0 ) result.value--;return false;"
-							 class="reduced items-count" type="button"><i class="lnr lnr-chevron-down"></i></button>
-						</div>
-						<div class="card_area d-flex align-items-center">
-							<a class="primary-btn" href="cart">Add to Cart</a>
-						</div>
+						<p>{{$product->description}}</p>
+						<form action="single-product" method="post" enctype="multipart/form-data">
+							@csrf  
+							<div class="product_count">
+								<label for="qty">Quantity:</label>
+								<input type="text" name="qty" id="sst" maxlength="12" value="1" title="Quantity:" class="input-text qty">
+								<button onclick="var result = document.getElementById('sst'); var sst = result.value; if( !isNaN( sst )) result.value++;return false;"
+								class="increase items-count" type="button"><i class="lnr lnr-chevron-up"></i></button>
+								<button onclick="var result = document.getElementById('sst'); var sst = result.value; if( !isNaN( sst ) &amp;&amp; sst > 0 ) result.value--;return false;"
+								class="reduced items-count" type="button"><i class="lnr lnr-chevron-down"></i></button>
+							</div>
+							<div class="card_area d-flex align-items-center">
+								<a class="primary-btn" href="cart">Add to Cart</a>
+							</div>
+						</form>
 					</div>
 				</div>
 			</div>
 		</div>
 	</div>
 	<!--================End Single Product Area =================-->
+	@endforeach
 
 	<!--================Product Description Area =================-->
 	<section class="product_description_area">
