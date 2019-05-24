@@ -19,6 +19,7 @@
 	<title>@yield('title')</title>
 	
 	<!-- CSS  -->
+	<link rel="stylesheet" href="/shop-assets/css/app.css">
 	<link rel="stylesheet" href="/shop-assets/css/linearicons.css">
 	<link rel="stylesheet" href="/shop-assets/css/font-awesome.min.css">
 	<link rel="stylesheet" href="/shop-assets/css/themify-icons.css">
@@ -30,6 +31,12 @@
 	<link rel="stylesheet" href="/shop-assets/css/ion.rangeSlider.skinFlat.css" />
 	<link rel="stylesheet" href="/shop-assets/css/magnific-popup.css">
 	<link rel="stylesheet" href="/shop-assets/css/main.css">
+	<link rel="stylesheet" href="/shop-assets/css/city.css">
+	<!-- <link rel="stylesheet" href="/css/bootstrap.css"> -->
+
+	<!-- JS -->
+	<script type="text/javascript" src="/shop-assets/js/city.js"></script>
+
 </head>
 
 <body>

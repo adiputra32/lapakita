@@ -14,6 +14,7 @@ class Transaction extends Model
     {
         return $this->belongsTo('App\Courier');
     }
+    
     public function detail(){
         return $this->hasMany('App\TransactionDetail','transaction_id');
     }
