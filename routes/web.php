@@ -24,11 +24,14 @@ Route::group(['prefix' => 'user'], function () {
     Route::post('/login', 'Auth\LoginController@login')->name('user.login.submit');
     Route::get('/logout','Auth\LoginController@logoutUser')->name('user.logout');
     Route::get('/home', 'ShopController@index')->name('user.home'); 
+    Route::post('/home', 'ShopController@indexAdd')->name('user.home'); 
     Route::get('/category', 'ShopController@category')->name('user.category');
-    Route::get('/single-product', 'ShopController@singleProduct')->name('user.single-product');  
-    Route::get('/cart', 'ShopController@cart')->name('user.cart');     
-    Route::get('/checkout', 'ShopController@checkout')->name('user.checkout');  
-    Route::get('/confirmation', 'ShopController@confirmation')->name('user.confirmation');  
+    Route::post('/category', 'ShopController@categoryAdd')->name('user.category');
+    Route::post('/single-product', 'ShopController@singleProduct')->name('user.single-product');  
+    Route::get('/cart', 'ShopController@cart')->name('user.cart');  
+    Route::post('/checkout', 'ShopController@checkout')->name('user.checkout');  
+    Route::get('/confirmation', 'ShopController@confirmation')->name('user.confirmation'); 
+    Route::post('/confirmation', 'ShopController@confirmationAdd')->name('user.confirmation');  
     Route::get('/contact', 'ShopController@contact')->name('user.contact');   
     Route::get('/tracking', 'ShopController@tracking')->name('user.tracking');       
 });

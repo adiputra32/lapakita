@@ -27,26 +27,42 @@
             <div class="container">
                 <div class="billing_details">
                     <div class="row">
-                        <div class="col-lg-4">
+                        <div class="col-lg-6">
                             <div class="order_box">
                                 <h2>Your Order</h2>
                                 <ul class="list">
-                                    <li><a href="#">Product <span>Total</span></a></li>
-                                    <li><a href="#">Fresh Blackberry <span class="middle">x 02</span> <span class="last">$720.00</span></a></li>
-                                    <li><a href="#">Fresh Tomatoes <span class="middle">x 02</span> <span class="last">$720.00</span></a></li>
-                                    <li><a href="#">Fresh Brocoli <span class="middle">x 02</span> <span class="last">$720.00</span></a></li>
+                                    <li><a>Product <span>Price</span></a></li>
+                                    <?php $tot_price = 0; ?>
+                                    @foreach($cart as $crt)
+                                        @foreach($product as $prd)
+                                            <?php if($prd->id == $crt->product_id){ ?>
+                                                <?php $tmp_price = $prd->price; $tmp_qty = $crt->qty; $tot_price = $tot_price + ($tmp_qty * $tmp_price); ?>
+                                                <li><a>{{$prd->product_name}} <span class="middle">x {{$tmp_qty}}</span> <span class="last">Rp {{$tmp_price = $tmp_price * $tmp_qty }}</span></a></li>
+                                            <?php } ?>
+                                        @endforeach
+                                    @endforeach
                                 </ul>
                                 <ul class="list list_2">
-                                    <li><a href="#">Subtotal <span>$2160.00</span></a></li>
-                                    <li><a href="#">Shipping <span>Flat rate: $50.00</span></a></li>
-                                    <li><a href="#">Total <span>$2210.00</span></a></li>
+                                    <form action="confirmation" method="post" enctype="multipart/form-data">
+                                        @csrf  
+                                    <li><a>Subtotal <span>Rp {{$tot_price}}</span></a></li>
+                                    <li><a>Shipping <span>Rp {{ $array_result = $array_result3['rajaongkir']['results'][0]['costs'][1]['cost'][0]['value'] }}</span></a></li>
+                                    <?php $price = $tot_price + $array_result; ?>
+                                    <li><a>Total <span>Rp {{ $price }}</span></a></li>
+                                    <input type="hidden" name="id_courier" value="{{$id_courier}}">
+                                    <input type="hidden" name="province" value="{{$province}}">
+                                    <input type="hidden" name="city" value="{{$city}}"> 
+                                    <input type="hidden" name="address" value="{{$address}}">
+                                    <input type="hidden" name="subtotal" value="{{$tot_price}}">
+                                    <input type="hidden" name="shipping" value="{{$array_result}}">
+                                    <input type="hidden" name="total_price" value="{{$price}}">
                                 </ul>
                                 <div class="creat_account">
-                                    <input type="checkbox" id="f-option4" name="selector">
-                                    <label for="f-option4">I’ve read and accept the </label>
-                                    <a href="#">terms & conditions*</a>
                                 </div>
-                                <a class="primary-btn" href="#">Proceed to Paypal</a>
+                                <button type="submit" style="all: unset; width: 100%;">
+                                    <a class="primary-btn">KONFIRMASI PESANAN</a>
+                                </button>
+                                </form>
                             </div>
                         </div>
                     </div>
